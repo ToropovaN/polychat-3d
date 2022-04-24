@@ -42,10 +42,13 @@ export class Environment {
         this.grassMaterial.bumpTexture = new Texture("/textures/grass_NRM.jpg", this._scene);
         this.grassMaterial.bumpTexture.level = 0.2;
 
-        this.earthMaterial = new StandardMaterial("earthMaterial", this._scene);
-        this.earthMaterial.diffuseTexture = new Texture("/textures/earth.png", this._scene);
+        this.earthMaterial = new PBRMaterial("earthMaterial", this._scene);
+        this.earthMaterial.albedoTexture = new Texture("/textures/earth.png", this._scene);
         this.earthMaterial.bumpTexture = new Texture("/textures/earth_NRM.jpg", this._scene);
-        this.earthMaterial.bumpTexture.level = 0.35;
+        this.earthMaterial.bumpTexture.level = 0.15;
+        this.earthMaterial.roughness = 1;
+        this.earthMaterial.metallic = 0.2;
+        console.log(this.earthMaterial);
 
         this.asphaltMaterial = new StandardMaterial("asphaltMaterial", this._scene);
         this.asphaltMaterial.diffuseTexture = new Texture("/textures/asphalt.png", this._scene);
@@ -154,7 +157,6 @@ export class Environment {
                 let nMesh = this.itemsMap[nName].clone(n.name + "Mesh");
 
                 nMesh.position = n.getAbsolutePosition();
-                //this._scene.stopAllAnimations();
                 if (n.name.includes("_")) {
                     let scale = parseFloat(n.name.substring(n.name.indexOf("_") + 1, n.name.indexOf("/")));
                     let rotate = parseFloat(n.name.substring(n.name.indexOf("/") + 1, n.name.length));
@@ -167,6 +169,7 @@ export class Environment {
                 }
             }
         });
+        this._scene.stopAllAnimations();
     }
 
     async loadItem(name){
@@ -183,10 +186,6 @@ export class Environment {
                 (m.material as StandardMaterial).emissiveTexture = (m.material as PBRMaterial).albedoTexture;
             }
         });
-
-        Result.animationGroups[0].speedRatio = 0.3;
-        //Result.animationGroups[0].goToFrame(Math.floor(Math.random() * 6));
-
 
         meshes.position.x = -200;
         this.itemsMap[name] = meshes;

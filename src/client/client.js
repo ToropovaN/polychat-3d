@@ -86,7 +86,7 @@ const interpolateCurrentState = (baseState, nextState) => {
 }
 
 const socketProtocol = 'ws';
-const socket = io("https://polychat-3d.herokuapp.com", { reconnection: false });
+const socket = io( `${socketProtocol}://${window.location.host}` , { reconnection: false }); //"https://polychat-3d.herokuapp.com"
 const connectedPromise = new Promise(resolve => {
     socket.on('connect', () => {
         mySocketId = socket.id;
