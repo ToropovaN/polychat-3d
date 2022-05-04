@@ -68,4 +68,11 @@ export class AvatarInput {
             this.jumpKeyDown = false;
         }
     }
+
+    public clearInputs() {
+        this.inputMap[87] = null;
+        this.inputMap[83] = null;
+        this.inputMap[65] = null;
+        this.inputMap[68] = null;
+    }
 }

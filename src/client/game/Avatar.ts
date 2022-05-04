@@ -25,7 +25,7 @@ export class Avatar extends Player{
     private _jumped: boolean = false;
 
     //const values
-    private static readonly PLAYER_SPEED: number = 0.2;
+    private static readonly PLAYER_SPEED: number = 10;
     private static readonly JUMP_FORCE: number = 0.4;
     private static readonly GRAVITY: number = -0.7;
 
@@ -88,6 +88,7 @@ export class Avatar extends Player{
 
     public activateAvatarCamera(): UniversalCamera {
         this.scene.registerBeforeRender(() => {
+            this._deltaTime = this.scene.getEngine().getDeltaTime() / 1000.0;
             this._updateFromControls();
             this._updateGroundDetection();
             this._setAvatarAnimation();
@@ -101,8 +102,6 @@ export class Avatar extends Player{
     }
 
     private _updateFromControls(): void {
-
-        this._deltaTime = this.scene.getEngine().getDeltaTime() / 1000.0;
         this._moveDirection = Vector3.Zero();
 
         if (this.currentEmotion) {
@@ -139,7 +138,7 @@ export class Avatar extends Player{
         }
 
         //final movement that takes into consideration the inputs
-        this._moveDirection = this._moveDirection.scaleInPlace(this._inputAmt * Avatar.PLAYER_SPEED);
+        this._moveDirection = this._moveDirection.scaleInPlace(this._inputAmt * Avatar.PLAYER_SPEED * this._deltaTime);
 
         //check if there is movement to determine if rotation is needed
         let input = new Vector3(this._input.horizontalAxis, 0, this._input.verticalAxis); //along which axis is the direction
@@ -182,8 +181,6 @@ export class Avatar extends Player{
     };
 
     private _updateGroundDetection(): void {
-        this._deltaTime = this.scene.getEngine().getDeltaTime() / 1000.0;
-
         //if not grounded
         if (!this._isGrounded()) {
             this._gravity = this._gravity.addInPlace(Vector3.Up().scale(this._deltaTime * Avatar.GRAVITY));
@@ -200,9 +197,7 @@ export class Avatar extends Player{
         if (this._gravity.y < 0 && this._jumped) {
             this._isFalling = true;
         }
-
         this.mesh.moveWithCollisions(this._moveDirection.addInPlace(this._gravity));
-
         if (this._isGrounded()) {
             this._gravity.y = 0;
             this._grounded = true;
@@ -258,6 +253,10 @@ export class Avatar extends Player{
             button.className = "emotions__button"
         }, this.emotionTime);
     }*/
+
+    public stopMoving(){
+        this._input.clearInputs();
+    }
 
     public startSendingPosition() {
         this.tick = setInterval(() => {

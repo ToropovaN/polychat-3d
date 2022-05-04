@@ -67,6 +67,12 @@ class App {
                 e.preventDefault();
             }
         });
+
+        this._canvas.addEventListener('blur', (e) => {
+            if (this._avatar) {
+                this._avatar.stopMoving();
+            }
+        });
     };
 
     private async _goToMenu() {

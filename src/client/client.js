@@ -215,7 +215,7 @@ const createMessage = (color, coloredText, text) => {
         newPlayerSpan.style.fontWeight = "bold";
         newPlayerP.prepend(newPlayerSpan);
         messageList.prepend(newPlayerP);
-        while (messageList.children.length > 10) messageList.removeChild(messageList.lastChild);
+        while (messageList.children.length > 30) messageList.removeChild(messageList.lastChild);
     }
 }
 

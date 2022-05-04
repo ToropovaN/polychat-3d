@@ -19,6 +19,7 @@ export class Environment {
         "tree2": null,
         "bush1": null,
         "flowerbed1": null,
+        "flowerbed2": null,
         "flowers1": null,
         "flowers2": null,
         "flowers3": null,
@@ -48,7 +49,6 @@ export class Environment {
         this.earthMaterial.bumpTexture.level = 0.15;
         this.earthMaterial.roughness = 1;
         this.earthMaterial.metallic = 0.2;
-        console.log(this.earthMaterial);
 
         this.asphaltMaterial = new StandardMaterial("asphaltMaterial", this._scene);
         this.asphaltMaterial.diffuseTexture = new Texture("/textures/asphalt.png", this._scene);
@@ -145,6 +145,7 @@ export class Environment {
         await this.loadItem("tree2");
         await this.loadItem("bush1");
         await this.loadItem("flowerbed1");
+        await this.loadItem("flowerbed2");
         await this.loadItem("flowers1");
         await this.loadItem("flowers2");
         await this.loadItem("flowers3");
