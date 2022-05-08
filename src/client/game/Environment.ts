@@ -17,14 +17,19 @@ export class Environment {
     private itemsMap = {
         "tree1": null,
         "tree2": null,
+        "treePine1": null,
+        "treePine2": null,
+        "treePine3": null,
         "bush1": null,
+        "bush2": null,
         "flowerbed1": null,
         "flowerbed2": null,
         "flowers1": null,
         "flowers2": null,
         "flowers3": null,
         "grass1": null,
-        "grass2": null
+        "grass2": null,
+        "grassField": null
     }
 
     private grassMaterial;
@@ -71,13 +76,13 @@ export class Environment {
 
         this.waterMaterial = new WaterMaterial("water", scene);
         this.waterMaterial.bumpTexture = new Texture("textures/waterbump.png", scene);
-        this.waterMaterial.windForce = -3;
+        this.waterMaterial.windForce = -2;
         this.waterMaterial.waveHeight = 0;
         this.waterMaterial.windDirection = new Vector2(1, 1);
         this.waterMaterial.waterColor = new Color3(0.1, 0.1, 0.6);
         this.waterMaterial.colorBlendFactor = 0.3;
-        this.waterMaterial.bumpHeight = 0.55;
-        this.waterMaterial.waveLength = 6;
+        this.waterMaterial.bumpHeight = 0.70;
+        this.waterMaterial.waveLength = 2;
 
         this.waterMaterial.a = 0.1;
 
@@ -143,7 +148,11 @@ export class Environment {
 
         await this.loadItem("tree1");
         await this.loadItem("tree2");
+        await this.loadItem("treePine1");
+        await this.loadItem("treePine2");
+        await this.loadItem("treePine3");
         await this.loadItem("bush1");
+        await this.loadItem("bush2");
         await this.loadItem("flowerbed1");
         await this.loadItem("flowerbed2");
         await this.loadItem("flowers1");
@@ -151,6 +160,7 @@ export class Environment {
         await this.loadItem("flowers3");
         await this.loadItem("grass1");
         await this.loadItem("grass2");
+        await this.loadItem("grassField");
 
         nodes.forEach( n => {
             if (n.name.includes("(item)")){

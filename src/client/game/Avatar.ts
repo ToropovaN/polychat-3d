@@ -93,6 +93,7 @@ export class Avatar extends Player{
             this._updateGroundDetection();
             this._setAvatarAnimation();
             this._camRoot.position = Vector3.Lerp(this._camRoot.position, new Vector3(this.mesh.position.x, this.mesh.position.y + 6, this.mesh.position.z - 4), 0.4);
+            if (this._camRoot.position.y > 18) this._camRoot.position.y = 18;
         })
         return this.camera;
     }
