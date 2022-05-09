@@ -198,8 +198,8 @@ export class Avatar extends Player{
         if (this._gravity.y < 0 && this._jumped) {
             this._isFalling = true;
         }
-        if (this._gravity.y > 0) this.mesh.moveWithCollisions(this._moveDirection.addInPlace(Vector3.Up().scale(this._deltaTime * 15)));
-        else this.mesh.moveWithCollisions(this._moveDirection.addInPlace(Vector3.Up().scale(this._deltaTime * -15)));
+        const vectorUp = this._gravity.y > 0 ?  Vector3.Up().scale(this._deltaTime * 15) : Vector3.Up().scale(this._deltaTime * -15);
+        this.mesh.moveWithCollisions(this._moveDirection.addInPlace(vectorUp));
         if (this._isGrounded()) {
             this._gravity.y = 0;
             this._grounded = true;
