@@ -26,8 +26,8 @@ export class Avatar extends Player{
 
     //const values
     private static readonly PLAYER_SPEED: number = 10;
-    private static readonly JUMP_FORCE: number = 1;
-    private static readonly GRAVITY: number = -1.5;
+    private static readonly JUMP_FORCE: number = 1.2;
+    private static readonly GRAVITY: number = -2.2;
 
     //player movement vars
     private _deltaTime: number = 0;
