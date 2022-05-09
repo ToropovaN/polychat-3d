@@ -114,12 +114,6 @@ export class Environment {
                 m.isVisible = false;
                 m.checkCollisions = true;
             }
-            /*trigger meshes
-            if (m.name.includes("Trigger")) {
-                m.isVisible = false;
-                m.isPickable = false;
-                m.checkCollisions = false;
-            }*/
             if (m.name.includes("Grass")) {
                 m.material = this.grassMaterial;
                 //(m as Mesh).markVerticesDataAsUpdatable(VertexBuffer.NormalKind, true);

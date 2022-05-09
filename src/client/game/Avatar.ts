@@ -26,8 +26,8 @@ export class Avatar extends Player{
 
     //const values
     private static readonly PLAYER_SPEED: number = 10;
-    private static readonly JUMP_FORCE: number = 0.4;
-    private static readonly GRAVITY: number = -0.7;
+    private static readonly JUMP_FORCE: number = 1;
+    private static readonly GRAVITY: number = -1.5;
 
     //player movement vars
     private _deltaTime: number = 0;
@@ -198,7 +198,8 @@ export class Avatar extends Player{
         if (this._gravity.y < 0 && this._jumped) {
             this._isFalling = true;
         }
-        this.mesh.moveWithCollisions(this._moveDirection.addInPlace(this._gravity));
+        if (this._gravity.y > 0) this.mesh.moveWithCollisions(this._moveDirection.addInPlace(Vector3.Up().scale(this._deltaTime * 15)));
+        else this.mesh.moveWithCollisions(this._moveDirection.addInPlace(Vector3.Up().scale(this._deltaTime * -15)));
         if (this._isGrounded()) {
             this._gravity.y = 0;
             this._grounded = true;
